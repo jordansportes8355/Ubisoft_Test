@@ -1,0 +1,16 @@
+In the join function, what is the broadcasting operation used for?
+
+In PySpark RDD and DataFrame, Broadcast variables are read-only shared variables that are cached and available on all nodes in a cluster in-order to access or use by the tasks. Instead of sending this data along with every task, PySpark distributes broadcast variables to the workers using efficient broadcast algorithms to reduce communication costs.
+
+You will find a script below which creates some features. How would you optimize it?
+Please describe a few potential solutions.
+
+I would broadcast the value in the spark context : 
+broadcast_dim_user = spark.sparkContext.broadcast(dim_user)
+
+I would use a left join here, the data about age and name is small and even if we don't find name or age we could still use the dataset.
+
+I would use the group by before the join because we don't use the data from dim_user and it's supposed to be unique.
+
+I would use functions instead of UDF.
+
